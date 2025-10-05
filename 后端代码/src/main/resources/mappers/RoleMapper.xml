@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gec.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.gec.entity.Role">
+            <id property="roleid" column="roleid" jdbcType="VARCHAR"/>
+            <result property="powerid" column="powerid" jdbcType="VARCHAR"/>
+            <result property="rolename" column="rolename" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        roleid,powerid,rolename
+    </sql>
+</mapper>

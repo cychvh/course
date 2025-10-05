@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gec.mapper.CrcountMapper">
+
+    <resultMap id="BaseResultMap" type="com.gec.entity.Crcount">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="teacherName" column="teacher_name" jdbcType="VARCHAR"/>
+            <result property="tkCount" column="tk_count" jdbcType="VARCHAR"/>
+            <result property="btCount" column="bt_count" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updatetime" column="updatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,teacher_name,tk_count,
+        bt_count,create_time,updatetime
+    </sql>
+</mapper>
