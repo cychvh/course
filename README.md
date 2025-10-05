@@ -292,16 +292,41 @@ public class LoginInterceptor implements HandlerInterceptor {
 ### 6.3 缓存策略
 
 @Service
-public class AnnouncementService {
-    
-    @Cacheable(value = "announcements", key = "#id")
-    public Announcement getById(Long id) {
-        return announcementMapper.selectById(id);
+public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice>
+    implements NoticeService{
+
+    @Override
+    @Cacheable(value = "notices",key = "all")
+    public List<Notice> queryNote() {
+        List<Notice> noticeList = baseMapper.selectList(null);
+        return noticeList;
     }
-    
-    @CacheEvict(value = "announcements", key = "#id")
-    public void updateAnnouncement(Announcement announcement) {
-        announcementMapper.updateById(announcement);
+
+    @Override
+    @CacheEvict(value = "notices",key = "all")
+    public Result saveOrUpdateNote(Notice notice) {
+        if(StringUtils.isEmpty(notice.getId())){
+            notice.setId(String.valueOf(Math.random()).substring(2,10));
+            int insert = baseMapper.insert(notice);
+            if(insert > 0){
+                return Result.success();
+            }else {
+                return Result.error("40008","添加失败");
+            }
+        }else{
+            int update = baseMapper.updateById(notice);
+            if(update > 0){
+                return Result.success();
+            }else{
+                return Result.error("40008","修改失败");
+            }
+        }
+    }
+
+    @Override
+    @CacheEvict(value = "notices",key = "all")
+    public boolean deleteNote(String id) {
+        return baseMapper.deleteById(id) > 0;
     }
 }
 
