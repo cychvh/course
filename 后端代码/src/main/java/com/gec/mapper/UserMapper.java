@@ -12,7 +12,12 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-
+   @Update("UPDATE user " +
+           "SET username = #{username}, " +
+           "    password = #{password}, " +
+           "    age = #{age}, " +
+           "    email = #{email} " +  // 根据你的User实体字段补充
+           "WHERE id = #{id}")  // 假设主键字段为id
    int updateByPrimaryKey(User record);
 }
 
